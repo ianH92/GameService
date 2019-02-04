@@ -1,8 +1,0 @@
-spring:
-  jpa:
-    hibernate:
-      ddl-auto: create
-  datasource:
-    url: jdbc:mysql://localhost:3306/gameservice
-    username: user
-    password: password

@@ -2,6 +2,7 @@ package gameservice.hibernate.configuration;
 
 import java.util.Properties;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -16,6 +17,24 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @EnableTransactionManagement
 public class HibernateConfiguration {
 	
+	@Value("${spring.jpa.hibernate.ddl-auto}")
+	private String hibernateHbm2ddl;
+	
+	@Value("${spring.jpa.database-platform}")
+	private String hibernateDialect;
+	
+	@Value("${spring.datasource.url}")
+	private String url;
+	
+	@Value("${spring.datasource.username}")
+	private String username;
+	
+	@Value("${spring.datasource.password}")
+	private String password;
+	
+	@Value("${spring.datasource.driver-class-name}")
+	private String driverClassName;
+	
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -27,7 +46,7 @@ public class HibernateConfiguration {
 		dataSource.setPassword(password);
 		sessionFactory.setDataSource(dataSource);
 		
-		sessionFactory.setPackagesToScan("");
+		sessionFactory.setPackagesToScan("gameservice.game.players.repository");
 		
 		Properties hibernateProperties = new Properties();
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");

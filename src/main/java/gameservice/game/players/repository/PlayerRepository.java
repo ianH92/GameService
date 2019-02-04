@@ -1,7 +1,8 @@
 package gameservice.game.players.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import gameservice.game.players.Player;
 
-public interface PlayerRepository extends JpaRepository<Player, Integer> {}
+public interface PlayerRepository {
+	public void savePlayer(Player player);
+	public Player findPlayer(Integer id);
+}
