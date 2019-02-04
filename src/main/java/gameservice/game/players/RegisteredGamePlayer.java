@@ -16,6 +16,10 @@ import lombok.Getter;
 @Entity
 public class RegisteredGamePlayer implements Player {
 	
+	public RegisteredGamePlayer(String name) {
+		this.name = name;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
