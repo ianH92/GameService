@@ -46,11 +46,11 @@ public class HibernateConfiguration {
 		dataSource.setPassword(password);
 		sessionFactory.setDataSource(dataSource);
 		
-		sessionFactory.setPackagesToScan("gameservice.game.players.repository");
+		sessionFactory.setPackagesToScan("gameservice.game.players");
 		
 		Properties hibernateProperties = new Properties();
-		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", hibernateHbm2ddl);
+		hibernateProperties.setProperty("hibernate.dialect", hibernateDialect);
 		sessionFactory.setHibernateProperties(hibernateProperties);
 		return sessionFactory;
 	}
