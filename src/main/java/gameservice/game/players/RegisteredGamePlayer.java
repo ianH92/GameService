@@ -9,20 +9,20 @@ import lombok.Getter;
 
 /**
  * 
- * @author IAN
+ * @author ianH92
  *
  */
 @Getter
 @Entity
 public class RegisteredGamePlayer implements Player {
 	
-	public RegisteredGamePlayer(String name) {
-		this.name = name;
+	public RegisteredGamePlayer(String username) {
+		this.username = username;
 	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String name;
+	private String username;
 }

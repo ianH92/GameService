@@ -17,22 +17,22 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @EnableTransactionManagement
 public class HibernateConfiguration {
 	
-	@Value("${spring.jpa.hibernate.ddl-auto}")
+	@Value("${spring.jpa.hibernate.ddl-auto:create}")
 	private String hibernateHbm2ddl;
 	
-	@Value("${spring.jpa.database-platform}")
+	@Value("${spring.jpa.database-platform:org.hibernate.dialect.H2Dialect}")
 	private String hibernateDialect;
 	
-	@Value("${spring.datasource.url}")
+	@Value("${spring.datasource.url:jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1}")
 	private String url;
 	
-	@Value("${spring.datasource.username}")
+	@Value("${spring.datasource.username:user}")
 	private String username;
 	
-	@Value("${spring.datasource.password}")
+	@Value("${spring.datasource.password:password}")
 	private String password;
 	
-	@Value("${spring.datasource.driver-class-name}")
+	@Value("${spring.datasource.driver-class-name:org.h2.Driver}")
 	private String driverClassName;
 	
 	@Bean
