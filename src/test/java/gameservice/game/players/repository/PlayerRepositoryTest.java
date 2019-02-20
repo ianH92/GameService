@@ -1,5 +1,8 @@
 package gameservice.game.players.repository;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.SessionFactory;
@@ -22,11 +25,57 @@ import gameservice.hibernate.configuration.HibernateConfiguration;
 public class PlayerRepositoryTest {
 	
 	@Autowired
-	private PlayerRepository pri;
+	private PlayerRepository playerRepository;
 	
 	@Test
-	public void TestOne() throws InterruptedException {
-		Player p = new RegisteredGamePlayer("p1");
-		pri.savePlayer(p);
+	public void testSave() throws InterruptedException {
+		Player player = new RegisteredGamePlayer("p1");
+		playerRepository.savePlayer(player);
+		
+		Player savedPlayer = playerRepository.findPlayer("p1");
+		
+		assertTrue(savedPlayer != null);
+		assertEquals("p1", ((RegisteredGamePlayer) savedPlayer).getUsername());
+		
+		playerRepository.deletePlayer(savedPlayer);
+	}
+	
+	@Test
+	public void testFindByUsername() {
+		Player player = new RegisteredGamePlayer("p1");
+		playerRepository.savePlayer(player);
+		
+		Player playerFoundByUsername = playerRepository.findPlayer("p1");
+		
+		assertEquals("p1", ((RegisteredGamePlayer) playerFoundByUsername).getUsername());
+		
+		playerRepository.deletePlayer(playerFoundByUsername);
+	}
+	
+	@Test
+	public void testFindById() {
+		Player player = new RegisteredGamePlayer("p1");
+		playerRepository.savePlayer(player);
+		
+		Player playerFoundByUsername = playerRepository.findPlayer("p1");
+		Player playerFoundById = playerRepository.findPlayer(playerFoundByUsername.getId());
+		
+		assertEquals(playerFoundByUsername.getId(), playerFoundById.getId());
+		
+		playerRepository.deletePlayer(playerFoundById);
+	}
+	
+	@Test
+	public void testDelete() {
+		Player player = new RegisteredGamePlayer("p1");
+		playerRepository.savePlayer(player);
+		
+		Player playerFoundByUsername = playerRepository.findPlayer("p1");
+		playerRepository.deletePlayer(playerFoundByUsername);
+		
+		Player deletedPlayer = playerRepository.findPlayer(playerFoundByUsername.getId());
+		System.out.println("deletedPlayer = " + deletedPlayer);
+		
+		assertTrue(deletedPlayer == null);
 	}
 }
